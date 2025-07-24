@@ -1,0 +1,198 @@
+<div style="width: 100%">
+    <!-- Main -->
+    <div class="flex-auto m-7 body-color">
+        <!-- body Card -->
+        <mat-card class="tab-color -mt-4">
+            <div class="flex flex-col bg-card shadow rounded overflow-hidden">
+                <mat-card>
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="mt-5">
+                        <div fxFlex="40%">
+                            <h1 class="header1">
+                                <mat-icon class="tblMatIcon mr-1">view_list</mat-icon>
+                                <span></span>
+                            </h1>
+                        </div>
+
+                        <div>
+                            <mat-form-field fxFlex="100%" style="width: 300px !important;">
+                                <input matInput placeholder="{{'search' |translate}}" #input/>
+                                <button mat-button matPrefix mat-icon-button>
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- List Grid -->
+                    <div class="flex flex-col bg-card shadow rounded overflow-x-auto sm:overflow-y-auto">
+                        <div class="overflow-x-auto sm:overflow-y-auto" cdkScrollable style="max-height: 500px;">
+                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 bg-transparent" matSort>
+
+                                <ng-container matColumnDef="sl">
+                                    <th style="width: 5%" class="text-center" *matHeaderCellDef>
+                                        
+                                    </th>
+                                    <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                                        
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="indentNo">
+                                    <th style="width: 30%" class="text-center" *matHeaderCellDef>
+                                        
+                                    </th>
+                                    <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                                        
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="assignDate">
+                                    <th style="width: 10%" class="text-center" *matHeaderCellDef>
+                                        
+                                    </th>
+                                    <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                                        
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="assignBy">
+                                    <th style="width: 20%" class="text-center" *matHeaderCellDef>
+                                        
+                                    </th>
+                                    <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                                        
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="type">
+                                    <th style="width: 10%" class="text-center" *matHeaderCellDef>
+                                   
+                                    </th>
+                                    <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                                       
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="action">
+                                    <th style="width: 5%" class="text-center" *matHeaderCellDef>
+                                        
+                                    </th>
+                                    <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                                        <div class="buttons">
+                                            <button mat-icon-button
+                                                    class="toggle-sidebar-folded"
+                                                    [matTooltip]="'report' | translate"
+                                                    fxHide.lt-lg>
+                                                <mat-icon>picture_as_pdf</mat-icon>
+                                            </button>
+                                            <button mat-icon-button
+                                                    class="toggle-sidebar-folded"
+                                                    [matTooltip]="'attachFile' | translate"
+                                                    fxHide.lt-lg>
+                                                <mat-icon>library_books</mat-icon>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="tableHeader"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                            </table>
+                        </div>
+
+                        <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="mt-5">
+                            <div fxFlex="40%">
+                                <mat-paginator
+                                    [length]="total"
+                                    [pageSize]="size"
+                                    [pageSizeOptions]="[2, 3, 5, 10, 25, 100]">
+                                </mat-paginator>
+                            </div>
+                            <div>
+                                <!-- Optional Button (commented) -->
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template fxFlex="100%" fxFlex.md="100%" fxFlex.sm="70%" fxFlex.xs="70%" #templateDialog1>
+    <div class="flex flex-col bg-card shadow rounded overflow-x-auto sm:overflow-y-auto" style="max-height: 80vh; overflow-y: auto;">
+        <div class="heading">
+            <h1></h1>
+        </div>
+
+        <div *ngIf="fileList.length > 0" class="flex flex-col bg-card shadow rounded overflow-x-auto sm:overflow-y-auto">
+            <div cdkScrollable class="overflow-x-auto sm:overflow-y-auto">
+                <table [dataSource]="dataSourceForFileUpload" class="mat-elevation-z8 bg-transparent" mat-table matSort>
+
+                    <ng-container matColumnDef="sl">
+                        <th *matHeaderCellDef class="text-alignment" style="width: 90px">
+                           
+                        </th>
+                        <td *matCellDef="let row; let index = index" mat-cell>
+                           
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fileTitle">
+                        <th *matHeaderCellDef class="text-alignment">
+                           
+                        </th>
+                        <td *matCellDef="let row" mat-cell>
+                            
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th *matHeaderCellDef class="text-alignment">
+                            
+                        </th>
+                        <td *matCellDef="let row" class="text-alignment" mat-cell>
+                            <mat-icon *ngIf="row?.active" color="primary" svgIcon="heroicons_solid:check-circle"></mat-icon>
+                            <mat-icon *ngIf="!row?.active" color="warn" svgIcon="heroicons_solid:x-circle"></mat-icon>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th *matHeaderCellDef class="text-alignment">
+                           
+                        </th>
+                        <td *matCellDef="let row" mat-cell>
+                            <div class="buttons">
+                                <button *ngIf="row?.extension?.toUpperCase() == 'PDF'"
+                                        
+                                        class="toggle-sidebar-folded"
+                                        fxHide.lt-lg
+                                        mat-icon-button>
+                                    <mat-icon>picture_as_pdf</mat-icon>
+                                </button>
+
+                                <button 
+                                        class="toggle-sidebar-folded"
+                                        fxHide.lt-lg
+                                        mat-icon-button>
+                                    <mat-icon color="accent">download</mat-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr *matHeaderRowDef="UploadedFilesColumns" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: UploadedFilesColumns" mat-row></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-3 mr-2">
+            <button [matDialogClose]="true" class="px-8 mr-2" mat-flat-button color="red"
+                    style="background-color: red" type="button">
+                <mat-icon class="mr-1">close</mat-icon>
+            
+            </button>
+        </div>
+    </div>
+</ng-template>

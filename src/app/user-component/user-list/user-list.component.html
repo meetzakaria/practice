@@ -1,0 +1,19 @@
+<app-user-form [user]="selectedUser" (onSave)="saveUser($event)"></app-user-form>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th><th>Email</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="editUser(user)">Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
